@@ -19,10 +19,13 @@ class AppLocalizations {
   late Map<String, String> _localizedStrings;
 
   Future<bool> load() async {
-    // Загружаем переводы на основе locale
-    _localizedStrings = locale.languageCode == 'ru'
-        ? Translations.ru
-        : Translations.en;
+    if (locale.languageCode == 'ru') {
+      _localizedStrings = Translations.ru;
+    } else if (locale.languageCode == 'ko') {
+      _localizedStrings = Translations.ko;
+    } else {
+      _localizedStrings = Translations.en;
+    }
     return true;
   }
 
@@ -46,6 +49,7 @@ class AppLocalizations {
   String get language => translate('language');
   String get russian => translate('russian');
   String get english => translate('english');
+  String get korean => translate('korean');
   String get darkTheme => translate('darkTheme');
   String get lightTheme => translate('lightTheme');
   String get gamePathNotSet => translate('gamePathNotSet');
@@ -53,7 +57,7 @@ class AppLocalizations {
   String get loading => translate('loading');
   String get error => translate('error');
   String get success => translate('success');
-  
+
   // Диалоги
   String get confirmDelete => translate('confirmDelete');
   String get cancel => translate('cancel');
@@ -62,7 +66,7 @@ class AppLocalizations {
   String get confirmDeleteMessage => translate('confirmDeleteMessage');
   String get selectMod => translate('selectMod');
   String get modFiles => translate('modFiles');
-  
+
   // Подсказки
   String get dragAndDropModsHere => translate('dragAndDropModsHere');
   String get selectModDescription => translate('selectModDescription');
@@ -71,7 +75,7 @@ class AppLocalizations {
   String get dragModHere => translate('dragModHere');
   String get modInfoTooltip => translate('modInfoTooltip');
   String get dragToEnableDisable => translate('dragToEnableDisable');
-  
+
   // Порядок загрузки модов
   String get modLoadOrder => translate('modLoadOrder');
   String get modLoadOrderDescription => translate('modLoadOrderDescription');
@@ -80,7 +84,7 @@ class AppLocalizations {
   String get applyOrder => translate('applyOrder');
   String get noEnabledMods => translate('noEnabledMods');
   String get manageLoadOrder => translate('manageLoadOrder');
-  
+
   // ZIP-архивы и импорт
   String get importingMods => translate('importingMods');
   String get modsAddedSuccess => translate('modsAddedSuccess');
@@ -96,7 +100,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) {
-    return ['en', 'ru'].contains(locale.languageCode);
+    return ['en', 'ru', 'ko'].contains(locale.languageCode);
   }
 
   @override
@@ -108,4 +112,4 @@ class _AppLocalizationsDelegate
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
-} 
+}
