@@ -12,7 +12,7 @@ class SettingsDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     final settingsProvider = Provider.of<SettingsProvider>(context);
-    
+
     return AlertDialog(
       title: Text(localizations.settings),
       content: SizedBox(
@@ -77,7 +77,7 @@ class SettingsDialog extends StatelessWidget {
   // Построить селектор темы
   Widget _buildThemeSelector(BuildContext context, SettingsProvider settingsProvider) {
     final localizations = AppLocalizations.of(context);
-    
+
     return Row(
       children: [
         Expanded(
@@ -113,53 +113,79 @@ class SettingsDialog extends StatelessWidget {
   // Построить селектор языка
   Widget _buildLanguageSelector(BuildContext context, SettingsProvider settingsProvider) {
     final localizations = AppLocalizations.of(context);
-    
-    return Row(
+
+    return Column(
       children: [
-        Expanded(
-          child: Tooltip(
-            message: localizations.english,
-            child: RadioListTile<String>(
-              title: Text(localizations.english),
-              value: 'en',
-              groupValue: settingsProvider.currentLocale.languageCode,
-              onChanged: (value) {
-                if (value != null) {
-                  settingsProvider.setLocale(Locale(value, ''));
-                  _showRestartDialog(context);
-                }
-              },
-              activeColor: AppTheme.primaryLight,
-              dense: true,
+        Row(
+          children: [
+            Expanded(
+              child: Tooltip(
+                message: localizations.english,
+                child: RadioListTile<String>(
+                  title: Text(localizations.english),
+                  value: 'en',
+                  groupValue: settingsProvider.currentLocale.languageCode,
+                  onChanged: (value) {
+                    if (value != null) {
+                      settingsProvider.setLocale(Locale(value, ''));
+                      _showRestartDialog(context);
+                    }
+                  },
+                  activeColor: AppTheme.primaryLight,
+                  dense: true,
+                ),
+              ),
             ),
-          ),
+            Expanded(
+              child: Tooltip(
+                message: localizations.russian,
+                child: RadioListTile<String>(
+                  title: Text(localizations.russian),
+                  value: 'ru',
+                  groupValue: settingsProvider.currentLocale.languageCode,
+                  onChanged: (value) {
+                    if (value != null) {
+                      settingsProvider.setLocale(Locale(value, ''));
+                      _showRestartDialog(context);
+                    }
+                  },
+                  activeColor: AppTheme.primaryLight,
+                  dense: true,
+                ),
+              ),
+            ),
+          ],
         ),
-        Expanded(
-          child: Tooltip(
-            message: localizations.russian,
-            child: RadioListTile<String>(
-              title: Text(localizations.russian),
-              value: 'ru',
-              groupValue: settingsProvider.currentLocale.languageCode,
-              onChanged: (value) {
-                if (value != null) {
-                  settingsProvider.setLocale(Locale(value, ''));
-                  _showRestartDialog(context);
-                }
-              },
-              activeColor: AppTheme.primaryLight,
-              dense: true,
+        Row(
+          children: [
+            Expanded(
+              child: Tooltip(
+                message: localizations.french,
+                child: RadioListTile<String>(
+                  title: Text(localizations.french),
+                  value: 'fr',
+                  groupValue: settingsProvider.currentLocale.languageCode,
+                  onChanged: (value) {
+                    if (value != null) {
+                      settingsProvider.setLocale(Locale(value, ''));
+                      _showRestartDialog(context);
+                    }
+                  },
+                  activeColor: AppTheme.primaryLight,
+                  dense: true,
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ],
     );
   }
-  
+
   // Показать диалог с информацией о необходимости перезапуска
   void _showRestartDialog(BuildContext context) {
     final localizations = AppLocalizations.of(context);
-    
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -174,4 +200,4 @@ class SettingsDialog extends StatelessWidget {
       ),
     );
   }
-} 
+}

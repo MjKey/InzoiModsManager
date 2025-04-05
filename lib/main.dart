@@ -13,13 +13,13 @@ import 'constants/app_theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   if (Platform.isWindows) {
     setWindowTitle('Inzoi Mods Manager');
     setWindowMinSize(const Size(800, 600));
     setWindowMaxSize(Size.infinite);
   }
-  
+
   runApp(
     MultiProvider(
       providers: [
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final settingsProvider = Provider.of<SettingsProvider>(context);
-    
+
     return MaterialApp(
       title: 'Inzoi Mods Manager by MjKey',
       theme: AppTheme.lightTheme,
@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: const [
         Locale('en', ''),
         Locale('ru', ''),
+        Locale('fr', ''),
       ],
       localizationsDelegates: const [
         AppLocalizations.delegate,
@@ -57,4 +58,4 @@ class MyApp extends StatelessWidget {
       home: const HomeScreen(),
     );
   }
-} 
+}
